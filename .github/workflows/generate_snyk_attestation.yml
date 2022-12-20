@@ -76,13 +76,11 @@ jobs:
           echo "found $docs attestation documents"
           mkdir -p ${ATTESTATION_DIR}
           for i in $(seq 0 $(( ${docs} - 1 )) ); do
-              cat response | jq --raw-output ".content[$i]" | base64 -d > "${ATTESTATION_DIR}/${ATTESTATION_NAME}-${i}"
+              cat response | jq --raw-output ".content[$i]" | base64 -d > "${i}-${ATTESTATION_DIR}/${ATTESTATION_NAME}"
           done
-          ls ${ATTESTATION_DIR}
-          cat ${ATTESTATION_DIR}/${ATTESTATION_NAME}-0
 
       - name: Upload resulting artifacts
         uses: actions/upload-artifact@v3
         with:
           name: attestations
-          path: ${ATTESTATION_DIR}/*
+          path: ${{ env.ATTESTATION_DIR }}/*
