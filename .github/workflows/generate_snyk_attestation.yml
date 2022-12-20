@@ -76,7 +76,7 @@ jobs:
           echo "found $docs attestation documents"
           mkdir -p ${ATTESTATION_DIR}
           for i in $(seq 0 $(( ${docs} - 1 )) ); do
-              cat response | jq --raw-output ".content[$i]" | base64 -d > "${i}-${ATTESTATION_DIR}/${ATTESTATION_NAME}"
+              cat response | jq --raw-output ".content[$i]" | base64 -d > "${ATTESTATION_DIR}/${i}-${ATTESTATION_NAME}"
           done
 
       - name: Upload resulting artifacts
