@@ -78,6 +78,8 @@ jobs:
           for i in $(seq 0 $(( ${docs} - 1 )) ); do
               cat response | jq --raw-output ".content[$i]" | base64 -d > "${ATTESTATION_DIR}/${ATTESTATION_NAME}-${i}"
           done
+          ls ${ATTESTATION_DIR}
+          cat ${ATTESTATION_DIR}/${ATTESTATION_NAME}-0
 
       - name: Upload resulting artifacts
         uses: actions/upload-artifact@v3
